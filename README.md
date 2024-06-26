@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Student Assistant ChatBot
 
-## Getting Started
+![GitHub repo size](https://img.shields.io/github/repo-size/erison7596/StudentAssistantBotFront)
+![GitHub language count](https://img.shields.io/github/languages/count/erison7596/StudentAssistantBotFront)
+![GitHub forks](https://img.shields.io/github/forks/erison7596/StudentAssistantBotFront)
 
-First, run the development server:
+<img src="public/apresentacao.gif" alt="Apresentação do projeto" width="800">
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+
+## 💻 Pré-requisitos
+
+Antes de começar, verifique se você atendeu aos seguintes requisitos:
+
+- Você instalou a versão mais recente do Node.js e npm.
+- Você tem uma máquina Windows, Linux ou Mac. Indique qual sistema operacional é compatível / não compatível.
+- Você leu a [documentação do Next.js](https://nextjs.org/docs).
+
+## 🚀 Instalando Student Assistant ChatBot
+
+Para instalar o Student Assistant ChatBot, siga estas etapas:
+
+Linux e macOS:
+
+```
+git clone https://github.com/erison7596/StudentAssistantBotFront.git
+cd StudentAssistantBotFront
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Windows:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```
+git clone https://github.com/erison7596/StudentAssistantBotFront.git
+cd StudentAssistantBotFront
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## ☕ Usando Student Assistant ChatBot
 
-## Learn More
+Para usar Student Assistant ChatBot, siga estas etapas:
 
-To learn more about Next.js, take a look at the following resources:
+```
+npm run dev
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 🖥️ Tecnologias
+Esse projeto está sendo feito nas seguintes tecnologias:
+* Next.js
+* Tailwind
+  
 
-## Deploy on Vercel
+### Codificação
+* Visual Studio
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
+# 👩🏼‍💻 Author
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<a href="https://github.com/erison7596/">
+ <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/41303655?v=4" width="100px;" alt=""/>
+ <br />
+ <sub><b>Erison Cavalcante</b></sub></a> <a href="https://github.com/erison7596/" title="github">🚀</a>
+👋🏽 Entre em contato!
+
+ [![Linkedin Badge](https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/erison-cavalcante-9402a714a/)](https://www.linkedin.com/in/erison-cavalcante-9402a714a/) [![Gmail Badge](https://img.shields.io/badge/-Gmail-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:erison7596@gmail.com)](mailto:erison7596@gmail.com) 
