@@ -63,14 +63,13 @@ const ChatComponent = ({ chatName, setChatName, chatId, initialMessages = [], se
         }));
         setMessages((prevMessages) => [...prevMessages, ...botMessages]);
 
-        // Update chat name after the first message
         if (chatName === 'New Chat') {
           const updatedChatName = input;
           const updatedChats = JSON.parse(localStorage.getItem('chats')) || [];
           const chatIndex = updatedChats.findIndex(chat => chat.id === chatId);
           if (chatIndex !== -1) {
             updatedChats[chatIndex].name = updatedChatName;
-            updateLocalStorageAndState(updatedChats, updatedChatName); // Update the state with the new chat name
+            updateLocalStorageAndState(updatedChats, updatedChatName);
           }
         }
       } catch (error) {

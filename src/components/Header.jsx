@@ -2,7 +2,7 @@ import { Bars3Icon } from '@heroicons/react/24/outline';
 import useMediaQuery from '../hooks/useMediaQuery';
 import Image from 'next/image';
 const Header = ({ onToggleSidebar }) => {
-  const isDesktop = useMediaQuery('(min-width: 768px)'); // Define the breakpoint for desktop
+  const isDesktop = useMediaQuery('(min-width: 768px)'); 
 
   return (
     <header className="bg-gray-800 text-white p-4 flex justify-between items-center h-16">

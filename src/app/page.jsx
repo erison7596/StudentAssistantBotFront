@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import ChatComponent from '../components/ChatComponent';
 import ChatSidebar from '../components/ChatSidebar';
 import Header from '../components/Header';
@@ -20,6 +20,58 @@ const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [chatToDelete, setChatToDelete] = useState(null);
 
+  const cleanMessageText = (text) => {
+    const regex = /\/provide_name\{"name":"(.*?)"\}/;
+    const match = text.match(regex);
+    return match ? text.replace(regex, match[1]) : text;
+  };
+
+  const startChat = useCallback(async (name, id, isNew = false) => {
+    setIsLoading(true);
+    const uniqueChatId = id || `chat_${Date.now()}`;
+    setChatId(uniqueChatId);
+    localStorage.setItem('currentChatId', uniqueChatId);
+
+    if (isNew) {
+      const newChat = { id: uniqueChatId, name: 'New Chat' };
+      const updatedChats = [...chats, newChat];
+      setChats(updatedChats);
+      localStorage.setItem('chats', JSON.stringify(updatedChats));
+
+      try {
+        console.log(`Sending initial message to API: ${process.env.NEXT_PUBLIC_API_URL}`);
+        const response = await fetch(process.env.NEXT_PUBLIC_API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            sender: uniqueChatId,
+            message: `/provide_name{"name":"${name}"}`,
+          }),
+        });
+
+        const data = await response.json();
+        console.log('API response:', data);
+
+        if (data && data.length > 0) {
+          const botMessage = cleanMessageText(data[0].text);
+          setInitialMessages([{ text: botMessage, sender: 'bot', isNew: true }]);
+          setChatName(botMessage);
+        }
+      } catch (error) {
+        console.error('Error starting chat:', error);
+      }
+    } else {
+      const storedMessages = JSON.parse(localStorage.getItem(`chat_${uniqueChatId}_messages`)) || [];
+      const updatedMessages = storedMessages.map(msg => ({ ...msg, isNew: false }));
+      setInitialMessages(updatedMessages);
+    }
+
+    setIsChatStarted(true);
+    setIsLoading(false);
+  }, [chats, cleanMessageText]);
+
   useEffect(() => {
     const storedUserName = localStorage.getItem('userName');
     const storedChatId = localStorage.getItem('currentChatId');
@@ -36,7 +88,7 @@ const Home = () => {
       const selectedChat = storedChats.find(chat => chat.id === storedChatId);
       if (selectedChat) {
         setChatName(selectedChat.name);
-        startChat(storedUserName, storedChatId); // Load the chat when page reloads
+        startChat(storedUserName, storedChatId); 
       }
     }
 
@@ -61,55 +113,6 @@ const Home = () => {
     };
   }, [chatId]);
 
-  const cleanMessageText = (text) => {
-    const regex = /\/provide_name\{"name":"(.*?)"\}/;
-    return text.replace(regex, '$1');
-  };
-
-  const startChat = async (name, id, isNew = false) => {
-    setIsLoading(true);
-    const uniqueChatId = id || `chat_${Date.now()}`;
-    setChatId(uniqueChatId);
-    localStorage.setItem('currentChatId', uniqueChatId);
-
-    if (isNew) {
-      const newChat = { id: uniqueChatId, name: 'New Chat' };
-      const updatedChats = [...chats, newChat];
-      setChats(updatedChats);
-      localStorage.setItem('chats', JSON.stringify(updatedChats));
-
-      try {
-        const response = await fetch(process.env.NEXT_PUBLIC_API_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            sender: uniqueChatId,
-            message: `/provide_name{"name":"${name}"}`,
-          }),
-        });
-
-        const data = await response.json();
-
-        if (data && data.length > 0) {
-          const botMessage = cleanMessageText(data[0].text);
-          setInitialMessages([{ text: botMessage, sender: 'bot', isNew: true }]);
-          setChatName(botMessage);  // Update the chat name after the initial message
-        }
-      } catch (error) {
-        console.error('Error starting chat:', error);
-      }
-    } else {
-      const storedMessages = JSON.parse(localStorage.getItem(`chat_${uniqueChatId}_messages`)) || [];
-      const updatedMessages = storedMessages.map(msg => ({ ...msg, isNew: false }));
-      setInitialMessages(updatedMessages);
-    }
-
-    setIsChatStarted(true);
-    setIsLoading(false);
-  };
-
   const handleAddChat = () => {
     const uniqueChatId = `chat_${Date.now()}`;
     const newChat = { id: uniqueChatId, name: 'New Chat' };
@@ -119,16 +122,16 @@ const Home = () => {
     setChatId(uniqueChatId);
     setChatName('New Chat');
     setInitialMessages([]);
-    startChat(userName, uniqueChatId, true); // Start the chat with the user name and mark it as new
-    setIsSidebarOpen(false); // Close the sidebar menu
+    startChat(userName, uniqueChatId, true);
+    setIsSidebarOpen(false);
   };
 
   const handleSelectChat = (id) => {
     const selectedChat = chats.find(chat => chat.id === id);
     if (selectedChat) {
       setChatName(selectedChat.name);
-      startChat(userName, selectedChat.id); // Start the chat without marking it as new
-      setIsSidebarOpen(false); // Close the sidebar menu
+      startChat(userName, selectedChat.id);
+      setIsSidebarOpen(false); 
     }
   };
 
@@ -140,7 +143,7 @@ const Home = () => {
     setUserName(name);
     localStorage.setItem('userName', name);
     setIsUserNameSet(true);
-    startChat(name, null, true); // Start the chat with the user name and mark it as new
+    startChat(name, null, true);
   };
 
   const openModal = (chat) => {
@@ -158,15 +161,15 @@ const Home = () => {
     chats.forEach(chat => {
       localStorage.removeItem(`chat_${chat.id}_messages`);
     });
-    window.location.reload(); // Recarrega a página para refletir a limpeza
+    window.location.reload(); 
   };
 
   const deleteChat = (id) => {
     const updatedChats = chats.filter(chat => chat.id !== id);
     localStorage.setItem('chats', JSON.stringify(updatedChats));
     localStorage.removeItem(`chat_${id}_messages`);
-    window.location.reload(); // Recarrega a página para refletir a remoção
-    closeModal(); // Close the modal after deletion
+    window.location.reload(); 
+    closeModal(); 
   };
 
   const confirmDeleteChat = () => {
@@ -193,7 +196,7 @@ const Home = () => {
               onSelectChat={handleSelectChat} 
               onAddChat={handleAddChat} 
               isOpen={isSidebarOpen}
-              openModal={openModal} // Pass the openModal function to the sidebar
+              openModal={openModal} 
             />
             <main className="flex-1 flex flex-col h-full overflow-y-auto">
               {isChatStarted ? (
@@ -202,7 +205,7 @@ const Home = () => {
                   chatId={chatId} 
                   initialMessages={initialMessages} 
                   setChatName={setChatName} 
-                  setChats={setChats} // Pass setChats as a prop
+                  setChats={setChats}
                 />
               ) : (
                 <div className="flex flex-1 justify-center items-center flex-col">
@@ -215,7 +218,6 @@ const Home = () => {
                   </button>
                 </div>
               )}
-              {/* Developer Info */}
               <footer className="relative px-2 py-1 text-center text-xs text-token-text-secondary md:px-[60px]">
                 <p>Desenvolvido por <a href='https://github.com/erison7596' target='_blank' className='git'>Erison</a></p>
               </footer>
