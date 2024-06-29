@@ -60,6 +60,7 @@ const Home = () => {
         }
       } catch (error) {
         console.error('Error starting chat:', error);
+        
       }
     } else {
       const storedMessages = JSON.parse(localStorage.getItem(`chat_${uniqueChatId}_messages`)) || [];
