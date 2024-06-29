@@ -39,7 +39,7 @@ const Home = () => {
       localStorage.setItem('chats', JSON.stringify(updatedChats));
 
       try {
-        console.log(`Sending initial message to API: ${process.env.NEXT_PUBLIC_API_URL}`);
+        
         const response = await fetch(process.env.NEXT_PUBLIC_API_URL, {
           method: 'POST',
           headers: {
@@ -52,7 +52,6 @@ const Home = () => {
         });
 
         const data = await response.json();
-        console.log('API response:', data);
 
         if (data && data.length > 0) {
           const botMessage = cleanMessageText(data[0].text);
