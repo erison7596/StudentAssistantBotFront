@@ -19,6 +19,7 @@
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+  overflow-x: hidden;
 }
 
 @layer utilities {
@@ -26,12 +27,17 @@ body {
     text-wrap: balance;
   }
 }
-
+.flex-1 {
+  flex: 1;
+  min-width: 0;
+}
 aside {
   display: flex;
   flex-direction: column;
   height: calc(100vh - 64px); /* Ajuste de acordo com a altura do seu header */
   overflow: hidden;
+  max-width: 100%;
+  width: 100%;
 }
 
 aside > .flex-grow {
@@ -44,6 +50,7 @@ aside > .flex-grow {
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15); /* Sombra */
+  word-break: break-word;
 }
 
 .message-user {
@@ -145,4 +152,25 @@ aside > .flex-grow {
 
 .custom-height {
   height: calc(100vh - 128px);
+}
+@media (max-width: 768px) {
+  .flex-1 {
+    flex-direction: column;
+  }
+  
+  aside {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  main {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .chat-item-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }

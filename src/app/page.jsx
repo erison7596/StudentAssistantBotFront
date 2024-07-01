@@ -39,7 +39,6 @@ const Home = () => {
       localStorage.setItem('chats', JSON.stringify(updatedChats));
 
       try {
-        
         const response = await fetch(process.env.NEXT_PUBLIC_API_URL, {
           method: 'POST',
           headers: {
@@ -60,7 +59,6 @@ const Home = () => {
         }
       } catch (error) {
         console.error('Error starting chat:', error);
-        
       }
     } else {
       const storedMessages = JSON.parse(localStorage.getItem(`chat_${uniqueChatId}_messages`)) || [];
@@ -189,7 +187,7 @@ const Home = () => {
       ) : isUserNameSet ? (
         <>
           <Header onToggleSidebar={handleToggleSidebar} />
-          <div className="flex flex-1 overflow-hidden relative custom-height">
+          <div className="flex flex-1 overflow-hidden relative">
             <ChatSidebar 
               chats={chats} 
               currentChatId={chatId} 
