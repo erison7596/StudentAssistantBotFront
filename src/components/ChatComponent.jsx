@@ -86,8 +86,8 @@ const ChatComponent = ({ chatName, setChatName, chatId, initialMessages = [], se
   };
 
   return (
-    <div className="flex flex-col custom-height">
-      <div className="flex-1 overflow-y-auto p-4">
+    <div className="flex flex-col h-[90vh]">
+      <div className="flex-1 overflow-y-auto p-4 h-[70vh]">
         {messages && messages.length > 0 ? (
           messages.map((msg, index) => (
             <div key={index} className={`mb-4 ${msg.sender === 'user' ? 'text-right' : 'text-left'}`}>
