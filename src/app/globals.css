@@ -173,4 +173,10 @@ aside > .flex-grow {
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  .teste{
+    max-height: 100dvh;
+  }
+  .teste2{
+    max-height: 91dvh;
+  }
 }

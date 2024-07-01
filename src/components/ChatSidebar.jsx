@@ -5,9 +5,9 @@ import TypingText from './TypingText';
 
 const ChatSidebar = ({ chats, currentChatId, onSelectChat, onAddChat, isOpen, openModal }) => {
   return (
-    <aside className={`bg-gray-100 p-4 w-64 fixed md:relative transition-transform transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 z-50 flex flex-col`}>
+    <aside className={`bg-gray-100 p-4 w-64 teste2 fixed md:relative transition-transform transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 z-50 flex flex-col`}>
       <h2 className="text-xl font-bold mb-4">Seus Chats</h2>
-      <div className="flex-grow overflow-y-auto">
+      <div className="flex-grow overflow-y-auto ">
         <ul>
           {chats.map((chat) => (
             <li key={chat.id} className={`chat-item ${chat.id === currentChatId ? 'bg-gray-200' : 'hover:bg-gray-200'}`}>
