@@ -86,7 +86,7 @@ const ChatComponent = ({ chatName, setChatName, chatId, initialMessages = [], se
   };
 
   return (
-    <div className="flex flex-col max-h-screen">
+    <div className="flex flex-col max-h-screen h-full">
       <div className="flex-1 overflow-y-auto p-4">
         {messages && messages.length > 0 ? (
           messages.map((msg, index) => (
