@@ -142,3 +142,7 @@ aside > .flex-grow {
 .git:hover {
   color: #1b2b41;
 }
+
+.custom-height {
+  height: calc(100vh - 64px);
+}
