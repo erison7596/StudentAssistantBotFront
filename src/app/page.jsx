@@ -198,7 +198,7 @@ const Home = () => {
               isOpen={isSidebarOpen}
               openModal={openModal} 
             />
-            <main className="flex-1 flex flex-col h-full overflow-y-auto">
+            <main className="flex-1 flex flex-col h-[100dvh-64px] overflow-y-auto">
               {isChatStarted ? (
                 <ChatComponent 
                   chatName={chatName} 
