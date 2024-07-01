@@ -1,6 +1,7 @@
 import { Bars3Icon } from '@heroicons/react/24/outline';
 import useMediaQuery from '../hooks/useMediaQuery';
 import Image from 'next/image';
+
 const Header = ({ onToggleSidebar }) => {
   const isDesktop = useMediaQuery('(min-width: 768px)'); 
 

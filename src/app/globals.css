@@ -18,12 +18,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
 @layer utilities {
@@ -31,10 +26,11 @@ body {
     text-wrap: balance;
   }
 }
+
 aside {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 64px); /* Substitua 64px pela altura real do seu header */
+  height: calc(100vh - 64px); /* Ajuste de acordo com a altura do seu header */
   overflow: hidden;
 }
 
@@ -43,13 +39,16 @@ aside > .flex-grow {
   overflow-y: auto; /* Permite rolagem no conteúdo principal da sidebar */
 }
 
-.message-user {
-  background-color: #dbf6c4; /* Cor de fundo similar ao WhatsApp */
+.message-user, .message-bot {
   position: relative;
   padding: 10px;
   border-radius: 10px;
-  border-top-right-radius: 0;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15); /* Sombra */
+}
+
+.message-user {
+  background-color: #dbf6c4; /* Cor de fundo similar ao WhatsApp */
+  border-top-right-radius: 0;
 }
 
 .message-user::before {
@@ -63,11 +62,7 @@ aside > .flex-grow {
 
 .message-bot {
   background-color: #ffffff; /* Cor de fundo para mensagens do bot */
-  position: relative;
-  padding: 10px;
-  border-radius: 10px;
   border-top-left-radius: 0;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15); /* Sombra */
 }
 
 .message-bot::before {
@@ -78,6 +73,7 @@ aside > .flex-grow {
   border: 10px solid transparent;
   border-top: 10px solid #ffffff; /* Mesma cor de fundo */
 }
+
 .dropdown-menu-item {
   display: flex;
   align-items: center;
@@ -116,6 +112,7 @@ aside > .flex-grow {
   align-items: center;
   justify-content: center;
 }
+
 .git {
   position: relative;
   color: #1c2128;

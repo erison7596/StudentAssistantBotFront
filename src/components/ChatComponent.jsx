@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import TypingText from './TypingText';
 
 const ChatComponent = ({ chatName, setChatName, chatId, initialMessages = [], setChats }) => {
@@ -6,6 +6,7 @@ const ChatComponent = ({ chatName, setChatName, chatId, initialMessages = [], se
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
     const storedMessages = JSON.parse(localStorage.getItem(`chat_${chatId}_messages`)) || [];
@@ -22,6 +23,10 @@ const ChatComponent = ({ chatName, setChatName, chatId, initialMessages = [], se
   useEffect(() => {
     localStorage.setItem(`chat_${chatId}_messages`, JSON.stringify(messages));
   }, [messages, chatId]);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
   const cleanMessageText = (text) => {
     const regex = /\/provide_name\{"name":"(.*?)"\}/;
@@ -101,6 +106,7 @@ const ChatComponent = ({ chatName, setChatName, chatId, initialMessages = [], se
             </div>
           </div>
         )}
+        <div ref={messagesEndRef} />
       </div>
       <div className="flex p-4 border-t border-gray-300">
         <input
