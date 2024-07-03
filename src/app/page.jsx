@@ -47,7 +47,6 @@ const Home = () => {
             message: `/provide_name{"name":"${name}"}`,
           }),
         });
-
         const data = await response.json();
 
         if (data && data.length > 0) {
