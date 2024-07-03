@@ -77,7 +77,6 @@ const Home = () => {
 
     const storedChats = JSON.parse(localStorage.getItem('chats')) || [];
     setChats(storedChats);
-
     if (storedChatId) {
       setChatId(storedChatId);
       const selectedChat = storedChats.find(chat => chat.id === storedChatId);
