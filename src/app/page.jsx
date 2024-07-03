@@ -31,7 +31,6 @@ const Home = () => {
     const uniqueChatId = id || `chat_${Date.now()}`;
     setChatId(uniqueChatId);
     localStorage.setItem('currentChatId', uniqueChatId);
-
     if (isNew) {
       const newChat = { id: uniqueChatId, name: 'New Chat' };
       const updatedChats = [...chats, newChat];
