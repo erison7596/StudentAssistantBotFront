@@ -37,7 +37,6 @@ const Home = () => {
       const updatedChats = [...chats, newChat];
       setChats(updatedChats);
       localStorage.setItem('chats', JSON.stringify(updatedChats));
-
       try {
         const response = await fetch(process.env.NEXT_PUBLIC_API_URL, {
           method: 'POST',
