@@ -55,7 +55,7 @@ Esse projeto está sendo feito nas seguintes tecnologias:
 * Visual Studio
 
 ---
-# 👩🏼‍💻 Author
+# 👩🏼‍💻 Autor
 
 <a href="https://github.com/erison7596/">
  <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/41303655?v=4" width="100px;" alt=""/>
