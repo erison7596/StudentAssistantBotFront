@@ -62,7 +62,6 @@ const Home = () => {
       const updatedMessages = storedMessages.map(msg => ({ ...msg, isNew: false }));
       setInitialMessages(updatedMessages);
     }
-
     setIsChatStarted(true);
     setIsLoading(false);
   }, [chats, cleanMessageText]);
